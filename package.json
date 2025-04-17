@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon scripts.ts"
+    "dev": "nodemon scripts.ts",
+    "prisma-reset": "npx prisma db push --force-reset"
   },
   "keywords": [],
   "author": "",
