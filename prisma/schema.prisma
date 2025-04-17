@@ -19,13 +19,14 @@ model User {
   name            String
   email           String           @unique
   password        String?
+  role            Role             @default(BASIC)
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
   writtenPost     Post[]           @relation("WrittenPosts")
   favouritePost   Post[]           @relation("FavouritePosts")
   UserPreferences UserPreferences?
 
-  @@unique([email, name])
+  @@unique([age, name])
   @@index([email])
 }
 
@@ -53,4 +54,9 @@ model Category {
   id    Int    @id @default(autoincrement())
   name  String @unique
   posts Post[]
+}
+
+enum Role {
+  BASIC
+  ADMIN
 }
