@@ -14,10 +14,43 @@ datasource db {
 }
 
 model User {
-  id       String  @id @default(cuid())
-  name     String
-  email    String  @unique
-  password String?
-  // createdAt DateTime @default(now())
-  // updatedAt DateTime @updatedAt
+  id              Int              @id @default(autoincrement())
+  age             Int
+  name            String
+  email           String           @unique
+  password        String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  writtenPost     Post[]           @relation("WrittenPosts")
+  favouritePost   Post[]           @relation("FavouritePosts")
+  UserPreferences UserPreferences?
+
+  @@unique([email, name])
+  @@index([email])
+}
+
+model UserPreferences {
+  id           Int     @id @default(autoincrement())
+  emailUpdates Boolean
+  user         User    @relation(fields: [userId], references: [id])
+  userId       Int     @unique
+}
+
+model Post {
+  id            Int        @id @default(autoincrement())
+  rating        Float
+  title         String
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  author        User       @relation("WrittenPosts", fields: [authorId], references: [id])
+  authorId      Int
+  favoriteBy    User?      @relation("FavouritePosts", fields: [favouriteById], references: [id])
+  favouriteById Int?
+  categories    Category[]
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  posts Post[]
 }
