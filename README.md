@@ -29,6 +29,8 @@ This repo serves as a hands-on learning experience with Prisma ORM. It includes:
 | PostgreSQL    | Relational database               |
 | dotenv        | Manage environment variables      |
 | JavaScript    | Main language used                |
+| Docker        | Containerization and environment setup |
+
 
 ---
 
